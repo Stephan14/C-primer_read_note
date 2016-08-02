@@ -8,7 +8,8 @@
 ### 算术类型
 	整型：字符和布尔类型
 	浮点型：
-	![C++标准规定的尺寸的最小值](http://1.png)
+	![C++标准规定的尺寸的最小值]
+	(https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/1.png)
 	一个char的大小和一个机器字节一样大，char16_t、wchar_t、char32_t、wchar_t类型用于
 	确保可以存放机器最大的扩展字符集中的任意一个字符，其中char32_t和char16_t为unicode
 	字符集服务。
@@ -70,9 +71,9 @@
 	串的实际长度要比它的内容多1.
 			//分行书写字符串字面值
 			cout<<"sdfsggf"
-		  "sdfdsfs"
+		  			"sdfdsfs";
 #### 转义序列
-	![C++标准规定的尺寸的最小值](./2.png)
+	![C++标准规定的尺寸的最小值](https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/2.png)
 			cout<<"\tHi!\n";
 			cout<<"Hi, \x4dO\115\n";//输出Hi MOM,转到新的一行
 			cout<<'\115';           //输出M
@@ -81,3 +82,6 @@
 	个字符：八进制数123和字符4；相反，\x要用到后面跟着的所有数字，\x1234表示一个16位的字
 	符。
 #### 指定字面值的类型
+	通过添加如下的前缀或者后缀，可以改变字符、整型和浮点型字面值的类型。
+	![指定字面值常量]
+	(https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/4.png)
