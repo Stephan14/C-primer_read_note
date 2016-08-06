@@ -47,16 +47,20 @@
 	2.当从一个无符号类型值中减去一个值时，不管这个值是不是无符号类型，必须要保证结果不能
 	是负值。
 	例如：
-				for( unsigned int u = 10; u>= 0; u--)
+```
+	for( unsigned int u = 10; u>= 0; u--)
 					cout<< u <<endl;
+```
 	以上代码会陷入死循环，因为unsigned int表示的值不可以是负数。
 	可以改成这样的：
-				unsigned u = 11;
-				while( u > 0 )
-				{
-					--u;
-					cout<< u << endl;
-				}
+```
+unsigned u = 11;
+while( u > 0 )
+{
+		--u;
+		cout<< u << endl;
+}
+```
 #### 注意
 	切勿混用带符号类型和无符号类型，当带符号类型取值为负时会出线异常结果。
 ### 字面值常量
@@ -74,9 +78,11 @@
 		  			"sdfdsfs";
 #### 转义序列
 	![C++标准规定的尺寸的最小值](https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/2.png)
-			cout<<"\tHi!\n";
-			cout<<"Hi, \x4dO\115\n";//输出Hi MOM,转到新的一行
-			cout<<'\115';           //输出M
+```
+cout<<"\tHi!\n";
+cout<<"Hi, \x4dO\115\n";//输出Hi MOM,转到新的一行
+	cout<<'\115';           //输出M
+```
 ###### 注意
 	反斜线\后面跟着的八进制数字超过3个，只有前3个数字与\构成转义序列，例如：\1234表示两
 	个字符：八进制数123和字符4；相反，\x要用到后面跟着的所有数字，\x1234表示一个16位的字
@@ -85,3 +91,4 @@
 	通过添加如下的前缀或者后缀，可以改变字符、整型和浮点型字面值的类型。
 	![指定字面值常量]
 	(https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/4.png)
+#### 布尔字面值和指针字面值
