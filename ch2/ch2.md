@@ -74,8 +74,9 @@ while( u > 0 )
 	字符串字面值实际上是由常量字符构成的数组，在每个字符串的结尾添加一个空字符，所以字符
 	串的实际长度要比它的内容多1.
 			//分行书写字符串字面值
-			cout<<"sdfsggf"
-		  			"sdfdsfs";
+			cout << "sdfsggf"
+		  	        "sdfdsfs";
+
 #### 转义序列
 	![C++标准规定的尺寸的最小值](https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/2.png)
 ```
