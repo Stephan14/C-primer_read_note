@@ -9,7 +9,7 @@
 	整型：字符和布尔类型
 	浮点型：
 	![C++标准规定的尺寸的最小值]
-	(https://github.com/Stephan14/C-primer_read_note/blob/master/ch2/1.png?raw=true)
+	(./1.png)
 	一个char的大小和一个机器字节一样大，char16_t、wchar_t、char32_t、wchar_t类型用于
 	确保可以存放机器最大的扩展字符集中的任意一个字符，其中char32_t和char16_t为unicode
 	字符集服务。
