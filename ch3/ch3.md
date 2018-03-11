@@ -61,3 +61,27 @@ index != str.size() && !isspace(str[index]); ++index) {
 ##### 注意
 - 使用下表之前，判断字符串是不是空的（empty()）
 - 保证下标的合法性，一般声明为无符号类型并保证小于size
+
+## 标准库类型vector
+vector中所有的对象的类型都是一样的，每个对象有一个索引与之对应，可以通过索引进行访问。由于引用不属于对象，所以不存在包含引用的vector。
+
+
+### 定义和初始化vector对象
+```
+vector<T>  v1(n, val)           //n个元素每个元素是val
+vector<T>  v2(n)                //n个元素每个元素默认值
+vector<T>  v3{a, b, c, d....}   //只能使用花括号
+vector<T>  v4 = {a, b, c, d....}
+
+//使用列表初始化，花括号里的值必须与T相同
+vector<string> v5{"HI"}        //列表初始化，一个元素
+vector<string> v6("HI")        //错误
+vector<string> v7{10}          //10个默认值
+vector<string> v8{10, "HI"}    //10个‘HI’值
+
+```
+
+#### 注意
+- 注意类型是不是匹配
+- 有些类不提供默认初始化，必须显示初始化，提供默认值
+- 注意初始化的时候，圆括号与花括号的区别
