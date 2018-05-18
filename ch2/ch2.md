@@ -224,7 +224,6 @@ using SI = Slase;
 ```
 typedef char *pstring;
 const pstring cstr = 0;   //指向字符的常量指针
-
 const char *cstr = 0;     //指向字符常量的指针
 ```
 以上两种声明方式不同，不要理解错误了
@@ -264,7 +263,7 @@ const auto &h =42;
 int i = 42, *p = &i, &r = i;
 decltype(r + 0) b;  //b 类型为int
 decltype(r) d;      //d 类型为int &
-decltype(*p) c;     //c 为int &类型，必须初始化
+decltype(*p) c;     //c 为int *类型，必须初始化
 ```
 
 ####注意
