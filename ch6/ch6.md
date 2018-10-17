@@ -158,3 +158,72 @@ decltype(odd) *arrPtr(int i ) {//需要加一个*转化成指针
     return (i % 2)? &odd, &even;
 }
 ```
+
+### 函数重载
+
+##### 定义重载函数
+- 不允许两个函数除了返回类型外其他所有要素都相同
+
+##### 重载和const形参
+- 顶层const的形参（指针或者引用）无法与一个没有顶层const的形参区分开来
+
+##### const_cast和重载
+当有以下一个函数：
+```
+const string &shortString(const string &s1, const string &s2)
+{
+    return s1.size() <= s2.size()? s1 : s2;
+}
+```
+需要实现一种返回普通引用的函数，可以使用const_cast实现：
+```
+string &shortString(string &s1, string &s2)
+{
+    auto &r = shortString(const_cast<const string&>(s1),
+                            const_cast<const string&>(s2));
+    return const_cast<string &>(r);
+}
+```
+
+#### 重载与作用域
+- 在不同的作用域中无法重载函数名，内层作用域中声明的名字会隐藏外层作用域中声明的同名实体
+
+
+### 特殊用途语言特性
+
+#### 默认实参
+- 一旦某一个参数被赋予了默认值，它后面的所有形参必须有默认值
+- 调用时，只能省略尾部实参
+- 在给定作用域中，一个形参只能被赋予一次默认实参，后续声明只能为之前的没有默认值的形参添加默认实参
+- 局部变量不能够作为默认实参,函数默认值在调用时进行求值
+
+#### 内联函数和constexpr函数
+
+##### 内联函数
+内联函数会在编译的过程中将函数展开，从而降低函数调用的开销。一般来说，内联机制用来优化规模较小、流程直接、频繁调用的函数，有时编译器会忽略这个优化。
+
+##### constexpr函数
+定义constexpr函数的几个要求：
+- 函数返回值类型及所有**形参**的类型都是字面值类型（只有内置类型存在字面值）
+- 函数中必须有且只有一个return语句
+
+执行时编译器把对constexpr函数调用替换成其结果值，为了能够在编译过程中随时展开，constexpr函数被隐式指定为内联函数
+
+**constexpr函数的返回值并非必须是一个常量**，例如：
+```
+constexpr size_t scale(size_t cnt) {return 42 * cnt; }
+```
+当scale的实参是常量表达式时，返回值是常量表达式；否侧，不是，如果当作常量表达式来使用编译器会报错。
+
+内联函数和constexpr可以多次定义，但是多次定义必须是相同的，所以可把定义放在头文件。
+
+#### 调试帮助
+
+##### assert预处理宏
+```
+assert(expr)
+```
+如果expr为假，输出信息并终止程序；如果为真，则什么都不做
+
+##### NDEBUG预处理变量
+如果定义了NDEBUG,则assert什么也不做，默认状态下没有定义NDEBUG，此时assert将执行运行时检查。
