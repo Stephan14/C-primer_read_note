@@ -70,3 +70,54 @@
 
 #### 友元
 类可以允许通过将其他类或者函数设置为友元来访问其私有成员，并且友元声明只能出现在类定义的内部，类内具体位置不限
+
+### 类的其他特性
+
+#### 类成员再探
+
+##### 定义一个类型成员
+```
+class Screen {
+public:
+    typedef std::string::size_type pos;
+    //using pos = std::string::size_type;
+    Screen &move(pos r, pos c);
+private:
+    pos cursor = 0;
+    pos hight = 0, width = 0;
+    std::string contents;
+}
+
+inline Screen &move(pos r, pos c) { //可以在外面指定内联函数
+    pos row = r * width;
+    cursor = row + c;
+    return *this;
+}
+```
+
+##### 可变数据成员
+有时希望修改某个类的数据成员，即使在一个const成员函数中也希望修改数据成员。此时，可以通过在变量的声明前加入`mutable`关键字来实现。
+
+```
+class Screen {
+public:
+    void some_member() const;
+private:
+    mutable size_t access_ctr;
+}
+
+void some_member() const {
+    access_ctr++;
+}
+
+
+##### 类数据成员的初始值
+当希望类的成员变量有一个默认初始值，在C++11中可以使用类内初始值实现。
+
+```
+class Window_mgr {
+private:
+    std::vector<Screen>{Screen(25, 55, ' ')};
+}
+```
+当提供一个类内初始值的时候，必须以等号或许和花括号的形式初始化。
