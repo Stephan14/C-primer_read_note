@@ -109,7 +109,7 @@ private:
 void some_member() const {
     access_ctr++;
 }
-
+```
 
 ##### 类数据成员的初始值
 当希望类的成员变量有一个默认初始值，在C++11中可以使用类内初始值实现。
@@ -118,6 +118,40 @@ void some_member() const {
 class Window_mgr {
 private:
     std::vector<Screen>{Screen(25, 55, ' ')};
-}
+};
 ```
 当提供一个类内初始值的时候，必须以等号或许和花括号的形式初始化。
+
+#### 返回*this的成员函数
+
+返回对象的本身而不是对象的副本
+
+##### 从const成员函数返回*this
+一个const成员含税如果以引用的形式返回*this，则其返回类型为常量引用。
+
+##### 基于const的重载
+由于可以根据是否是底层const变量来进行函数的重载。同样，可以根据是否是const成员函数进行重载。
+```
+class Scren {
+public:
+    Screen &display(std::ostream &os) { //this 指针从非常量转化成常量指针
+        do_display(os);
+        return *this;
+    }
+
+    const Screen &display(std::ostream &os) const {
+        do_display(os);
+        return *this;
+    }
+private:
+    void do_display(std::ostream &os) const {
+        os << contents;
+    }
+}；
+
+Screen myScreen(5, 3);
+const Screen blank(5,3);
+myScreen.set("+").display(count);
+blank.display(count);
+
+```
