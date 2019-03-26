@@ -24,7 +24,7 @@ public:
 private:
     std::shared_ptr<std::vector<std::string>> data;
     void check(size_type i, const std::string &msg) const { // 为了重载 front 和 back 类型
-        if (i < 0 || i > data->size()) {
+        if (i > data->size()) { // 不需要判断整数，因为size_type为无符号类型，小于0时会转化成正整数
             std::cout << msg;
         }
     }
@@ -55,7 +55,7 @@ const std::string& StrBlob::back() const {
 int main() {
     const StrBlob s = {"ss", "sb"};
     std::cout << s.front();
-    StrBlob s = {"ss", "sb"};
-    std::cout << s.front();
+    StrBlob s2 = {"ss", "sb"};
+    std::cout << s2.front();
     return 0;
 }
