@@ -19,8 +19,8 @@ public:
     std::string& front();
     std::string& back();
 
-    std::string& front() const;
-    std::string& back() const;
+    const std::string& front() const;
+    const std::string& back() const;
 private:
     std::shared_ptr<std::vector<std::string>> data;
     void check(size_type i, const std::string &msg) const { // 为了重载 front 和 back 类型
@@ -41,13 +41,13 @@ std::string& StrBlob::back() {
     return data->back();
 }
 
-std::string& StrBlob::front() const {
+const std::string& StrBlob::front() const {
     std::cout << "const";
     check(0 , "front error");
     return data->front();
 }
 
-std::string& StrBlob::back() const {
+const std::string& StrBlob::back() const {
     check(0, "back error"); //为const类型
     return data->back();
 }
