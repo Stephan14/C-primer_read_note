@@ -20,4 +20,5 @@ int main() {
     auto v = init();
     input(v);
     output(v);
+    delete v;
 }
