@@ -1,28 +1,11 @@
- <center>
-     <h1>邹盛富</h1>
-     <div>
-         <span>
-             <img src="assets/phone-solid.svg" width="18px">
-             13161653507
-         </span>
-         <span>
-             <img src="assets/envelope-solid.svg" width="18px">
-             zsf657135507@163.com
-         </span>
-         <span>
-             <img src="assets/github-brands.svg" width="18px">
-             <a href="https://github.com/Stephan14">Stephan14</a>
-         </span>
-         <span>
-             <img src="assets/rss-solid.svg" width="18px">
-             <a href="#">https://stephan14.github.io/</a>
-         </span>
-     </div>
- </center>
 
- ## <img src="assets/info-circle-solid.svg" width="30px"> 个人信息
-
- - 男，1995年出生
+## <img src="assets/info-circle-solid.svg" width="30px"> 个人信息
+ - 姓名：邹盛富
+ - 手机：13161653507
+ - 邮箱：zsf657135507@163.com
+ - github：https://github.com/Stephan14
+ - 博客：https://stephan14.github.io/
+ - 出生日期：1995/04/23
  - 求职意向：研发工程师
  - 籍贯：辽宁 大连
 
@@ -39,6 +22,7 @@
 
  - **基于kafka的消息中间件平台的开发**
  kafka是字节跳动内部第二大基础服务平台，承载着抖音、今日头条、火山小视频、西瓜小视频、皮皮虾等海外项目的模型训练以及广告计费项目，目前有1W+台服务器
+
     - 参与开发kafka双机房开发，包括副本拷贝以及队列分离等功能
     - 维护kafka python以及golang客户端
     - 通过hash分片方式添加kafka所有集群的监控
