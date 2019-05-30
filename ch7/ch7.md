@@ -170,3 +170,48 @@ class Sales_data item;
 - 一个类只有全部被定义之后才被认为是定义了，所以一个类个成员不应该是成员自己；一个类的名字一旦出现之后就会被认为是类已经声明过了，因此类允许包含执行自身类型的引用和指针。
 
 #### 友元再探
+友元函数可以定义在类的内部，这样函数时隐式的内联。
+
+##### 类之间的友元关系
+```
+class Screen {
+    //Window_mgr 可以访问Screen 的私有部分
+    friend class Window_mgr;
+};
+```
+如果一个类指定了友元，则友元类的成员可以访问包含非公有成员在内的所有成员。同时，友元不具有传递性。
+
+##### 令成员函数作为友元
+```
+class Screen {
+    //Window_mgr::clear必须在这个之前被声明
+    friend void Window_mgr::clear(ScreenIndex);
+};
+```
+- 先声明友元函数，但是不能定义
+- 再定义相关的友元函数的依赖的类
+- 最后定义相关的友元函数
+
+##### 函数重载和友元
+如果一个类想把一组重载函数声明成他的友元函数，需要对这组中的函数每一个分别进行声明。
+```
+extern std::ostream& storeOn(std::ostream&, Screen &);
+extern BitMap& storeOn(BitMap&, Screen &);
+class Screen {
+    friend std::ostream& storeOn(std::ostream&, Screen &);
+};
+```
+接受ostream&的storeOn函数声明成它的友元函数，但是接受BitMap&作为参数的版本依然不能访问Screen
+
+##### 友元声明和作用域
+```
+struct X {
+    friend void f() {/*友元函数可以定义在类的内部*/}
+    X() { f(); } //错误：f还没有被声明
+    void g();
+    void h();
+};
+void X::g() { return f() }; // 错误：f还没有被声明
+void f();
+void X::h() { return f()}; // 正确
+```
