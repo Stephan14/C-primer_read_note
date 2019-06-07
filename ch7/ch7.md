@@ -215,3 +215,80 @@ void X::g() { return f() }; // 错误：f还没有被声明
 void f();
 void X::h() { return f()}; // 正确
 ```
+
+### 类的作用域
+
+##### 作用域和定义在类外部的成员
+
+一旦遇到了类名，定义的剩余部分就在类的作用域之内，剩余部分包括参数列表和函数体。例如：
+```
+void Window_mgr::clear(ScreenIndex i) {
+  Screen &s = screens[i];
+  s.contents = string(s.height * s.width, ' ')
+}
+```
+函数的返回类型通常出现在函数名之前，也就是意味着当成员函数的定义在类的外部时，返回类型中使用的名字都位于类的作用域之外，这时返回类型需要指明是哪一个类的。例如：
+```
+Window_mgr::ScreenIndex Window_mgr::addScreen(const Screen &s) {
+  screens.push_back(s);
+  return screens.size() - 1;
+}
+```
+
+#### 名字查找与类的作用域
+
+成员函数体直到整个类可见后才会被处理，所以可以使用类中的任何名字。
+
+#### 用于类成员声明的名字查找
+上面说的只是适用于成员函数中使用的名字，对于声明中使用的名字（包括返回类型或者参数列表中的名字），都必须确保在使用前可见。例如：
+```
+typedef double Money;
+string bal;
+class Account {
+public:
+  Money balance() { return bal;  //返回值为类内的bal而非类外的bal, 因为balance函数体在整个类可见后才被处理；对于Money在Account类没有找到，所以会到类外进行查找}
+private:
+  Money bal;
+};
+```
+
+#### 类型名要特殊处理
+一般情况下，在内层作用域可以重新定义外层作用域的名字，即使该名字已经在内存作用域中使用；但是，在类中却不行，例如：
+```
+typedef double Money;
+string bal;
+class Account {
+public:
+  Money balance() { return bal; }  //使用外层Money
+private:
+typedef double Money;  //错误
+  Money bal;
+};
+```
+
+#### 成员定义中的普通块作用域的名字查找
+
+查找顺序：
+- 在成员函数内部查找该名字的声明
+- 在类的内部继续查找，所有成员都被考虑
+- 在成员函数定义之前的作用域内继续查找
+```
+int height;
+class Screen {
+public:
+  typedef std::string::size_type pos;
+  void dummy_fcn(pos height) {
+    cursor = width * height;
+  }
+
+  //void dummy_fcn(pos height) {
+  //  cursor = width * this->height;
+  //  cursor = width * Screen::height;
+  //  cursor = width * ::height;
+  //}
+private:
+  pos cursor = 0;
+  pos height = 0, width = 0;
+};
+
+```
